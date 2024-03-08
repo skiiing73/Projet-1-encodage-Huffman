@@ -42,10 +42,10 @@ class Tree:
         self.root = node
 
 def creerArbre():
-    alphabet = frequence_alphabet("Projet 631 Algorithmique/Projet-1-encodage-Huffman/textesimple.txt")
+    alphabet = frequence_alphabet("textesimple.txt")
     liste_arbres = []
     
-    for el in alphabet:
+    for el in alphabet[0].keys():
         nom_noeud = "noeud" + el
         noeud = Node(el)
         
@@ -54,6 +54,6 @@ def creerArbre():
         
         liste_arbres.append(arbre)
     
-    return liste_arbres
+    print(liste_arbres)
 
 creerArbre()
