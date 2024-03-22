@@ -63,7 +63,7 @@ def creation_fichier_frequence(nom_fichier):
         fichier.write(f"Fréquence totale : {alphabet[1]}\n")
         # Écrire les fréquences de chaque caractère dans le fichier
         for caractere, frequence in alphabet[0].items():
-            fichier.write(f"{caractere}: {frequence}\n")
+            fichier.write(f"{caractere} {frequence}\n")
 
 
 
