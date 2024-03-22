@@ -53,13 +53,13 @@ def taux_compression(file_txt,file_bin):
     """
     sizefile_txt=os.path.getsize(file_txt)
     sizefile_bin=os.path.getsize(file_bin)
-    print("taux de compression du fichier: ",round(1-(sizefile_bin/sizefile_txt),4))
+    print("Taux de compression du fichier: ",round(1-(sizefile_bin/sizefile_txt),4))
     
 
 def inverser_compression(nomfichier):
     """
     permet de reconvertir les données binaire du fichier en chaines de caracteres de 0 et 1 correspondant a l'encodage des caractères
-    Cette fonction permet seulement de verifier que la conversion des données en binaire a bien été effectué
+    Cette fonction permet seulement de verifier que la conversion des données en binaire a bien été effectué 
     
     Args:
     nomfichier (str) nom du fichier binaire """
@@ -73,9 +73,12 @@ def inverser_compression(nomfichier):
                 donnees_str = ''.join(format(byte, '08b') for byte in donnees_binaires)
                 print(donnees_str)
 
+
 if __name__ =="__main__":
     #compression et affichage des statistiques des fichiers de données
     for fichier in liste_fichiers:
         compression(fichier)
         fichierbinaire=fichier[:-4]+ "_comp.bin"
         taux_compression(fichier,fichierbinaire)
+
+    inverser_compression("fichiers_tests/extraitalice_comp.bin")

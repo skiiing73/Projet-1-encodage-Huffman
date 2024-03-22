@@ -19,4 +19,4 @@ de construction de l’arbre de Huffman.
 
 
 Afin de pouvoir compresser des fichiers il faut que les fichiers tests soient placés dans le dossier fichiers_tests.
-Puis dans il faut lancer le programme main.py en prenant soin de modifier la liste des fichiers avec les bons de noms de fichiers que vous souhaitez compresser. 
+Puis dans python il faut lancer le programme main.py en prenant soin de modifier la liste des fichiers avec les bons de noms de fichiers que vous souhaitez compresser. 
