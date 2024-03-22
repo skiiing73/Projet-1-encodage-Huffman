@@ -32,6 +32,8 @@ class Node:
     def setleftChild(self, node):
         self.leftChild = node
 
+    def setcaractere(self,new_value):
+        self.caractere=new_value
     # Méthode d'affichage du nœud
     def __str__(self):
         return f"{self.caractere}:{self.frequence}"
@@ -74,6 +76,9 @@ class Tree:
          if node.getleftChild():
              result += self.print_tree(node.getleftChild(), indent + 4, False)
          return result"""
+    
+
+        
 
 def minArbre(liste):
     """
@@ -113,7 +118,7 @@ def creerArbre(nomfichier):
         liste_arbres.remove(t2)
 
         # Création d'un nouveau nœud interne avec les arbres t1 et t2 comme enfants
-        noeud_t = Node("inter", t1.getroot().getfrequence() + t2.getroot().getfrequence(), t1.getroot(), t2.getroot())
+        noeud_t = Node("intermediaire", t1.getroot().getfrequence() + t2.getroot().getfrequence(), t1.getroot(), t2.getroot())
         arbret = Tree(noeud_t)
         liste_arbres.insert(0, arbret)
     
