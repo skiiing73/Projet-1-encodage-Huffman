@@ -20,15 +20,17 @@ def encodage_caractere(huffman_tree):
         """
 
         if node.getleftChild() is None and node.getrightChild() is None:
-            dict[node.getcaractere()]=encodage
+            # Si le nœud est une feuille (un caractère), enregistrer son code dans le dictionnaire
+            dict[node.getcaractere()] = encodage
         else:
-
-            if node.getleftChild()!=None:
-                rec_encodage_caractere(node.getleftChild(),dict,encodage+"0")
-            if node.getrightChild()!=None:
-                rec_encodage_caractere(node.getrightChild(),dict,encodage+"1")
-       
-    rec_encodage_caractere(huffman_tree.getroot(),dict,"")
+            # Si le nœud n'est pas une feuille, continuer à parcourir l'arbre
+            if node.getleftChild() is not None:
+                rec_encodage_caractere(node.getleftChild(), dict, encodage + "0")  # Ajouter 0 pour le fils gauche
+            if node.getrightChild() is not None:
+                rec_encodage_caractere(node.getrightChild(), dict, encodage + "1")  # Ajouter 1 pour le fils droit
+    
+    # Appeler la fonction récursive pour démarrer le processus d'encodage
+    rec_encodage_caractere(huffman_tree.getroot(), dict, "")
     
     return dict
 
@@ -40,7 +42,7 @@ def encodage_fichier(nomfichier,dict):
     - nomfichier (str): Le nom du fichier à encoder.
     - dict (dict): Le dictionnaire de codage contenant les caractères et leurs codes correspondants.
     """
-    
+
     res=bitarray()
     with open(nomfichier, 'r') as file:
         # Lire chaque ligne du fichier dans une liste

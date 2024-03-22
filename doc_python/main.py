@@ -5,7 +5,7 @@ from bitarray import bitarray
 import os
 
 
-liste_fichiers=["textesimple.txt","extraitalice.txt","alice.txt"]
+liste_fichiers=["fichiers_tests/textesimple.txt","fichiers_tests/extraitalice.txt","fichiers_tests/alice.txt"]
 def compression(nomfichier):
     """
     cette fonction permet de compresser un fichier texte en un fichier binaire qui est créé
@@ -32,13 +32,14 @@ def compression(nomfichier):
         res=0
         cpt=0
         for encodage in dict.items():
-            res+=len(encodage)
+            res+=len(encodage[1])
             cpt+=1
-        return res/cpt
+        return round(res/cpt,4)
+    
     bits_moyen=nb_moyenbits(dict_encode)
     #creation du fichier binaire
     encodage_fichier(nomfichier,dict_encode)
-    print("fichier: ",nomfichier," compressé avec succès.\n Le nombre moyen de bits par caractère est de ",bits_moyen," bits.")
+    print("fichier: ",nomfichier," compressé avec succès.\nLe nombre moyen de bits par caractère est de ",bits_moyen," bits.")
 
 
 def taux_compression(file_txt,file_bin):

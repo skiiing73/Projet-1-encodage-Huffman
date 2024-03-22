@@ -16,3 +16,7 @@ de caractère (<nom>_freq.txt).
 Ces deux fichiers permettront dans le cadre d’un projet de décompression de retrouver le texte initial
 dans le mesure où les programmes de compression et de décompression respectent les mêmes règles
 de construction de l’arbre de Huffman.
+
+
+Afin de pouvoir compresser des fichiers il faut que les fichiers tests soient placés dans le dossier fichiers_tests.
+Puis dans il faut lancer le programme main.py en prenant soin de modifier la liste des fichiers avec les bons de noms de fichiers que vous souhaitez compresser. 
