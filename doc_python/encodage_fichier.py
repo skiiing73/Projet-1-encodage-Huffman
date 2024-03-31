@@ -44,6 +44,7 @@ def encodage_fichier(nomfichier,dict):
     """
 
     res=bitarray()
+    
     with open(nomfichier, 'r') as file:
         # Lire chaque ligne du fichier dans une liste
         lignes = file.readlines()
@@ -52,11 +53,12 @@ def encodage_fichier(nomfichier,dict):
             # Parcourir chaque caractère de la ligne
             for caractere in ligne:
                 # Ajouter le code du caractère correspondant à la séquence de bits
+                #print(caractere,dict[' '])
                 res.extend(dict[caractere])
-
+                
+   
     nom_fichier_ecriture = nomfichier[:-4] + "_comp.bin"
     with open(nom_fichier_ecriture, "wb") as fichier:
         # Écrire la fréquence totale dans le fichier
         res.tofile(fichier)
-
-    
+   

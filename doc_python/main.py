@@ -1,11 +1,11 @@
 from frequence_caractere import *
 from Arbre_binaire import * 
-from encodage_caractere import *
+from encodage_fichier import *
+from decodage_fichier import *
 from bitarray import bitarray
 import os
+import sys
 
-
-liste_fichiers=["fichiers_tests/textesimple.txt","fichiers_tests/extraitalice.txt","fichiers_tests/alice.txt"]
 def compression(nomfichier):
     """
     cette fonction permet de compresser un fichier texte en un fichier binaire qui est créé
@@ -19,6 +19,7 @@ def compression(nomfichier):
     huffman_tree = creerArbre(nomfichier)
     #creation d'un dictionnaire contenant le code des caracteres
     dict_encode=encodage_caractere(huffman_tree)
+    
     def nb_moyenbits(dict):
         """
         Calcul du nombre moyen de bits par caractere
@@ -56,29 +57,33 @@ def taux_compression(file_txt,file_bin):
     print("Taux de compression du fichier: ",round(1-(sizefile_bin/sizefile_txt),4))
     
 
-def inverser_compression(nomfichier):
-    """
-    permet de reconvertir les données binaire du fichier en chaines de caracteres de 0 et 1 correspondant a l'encodage des caractères
-    Cette fonction permet seulement de verifier que la conversion des données en binaire a bien été effectué 
+def decompression(nomfichierbin,nomfichier_freq):
+     # Création de l'arbre de Huffman et affichage
+    huffman_tree = creerArbre(nomfichier_freq,"decodage")
+    res=decodage_fichier(nomfichierbin,huffman_tree)
     
-    Args:
-    nomfichier (str) nom du fichier binaire """
-    with open(nomfichier, 'rb') as file:
-            # Lire chaque ligne du fichier dans une liste
-           
-            lignes = file.readlines()
-            # Parcourir chaque ligne du fichier
-            for ligne in lignes:
-                donnees_binaires=ligne
-                donnees_str = ''.join(format(byte, '08b') for byte in donnees_binaires)
-                print(donnees_str)
+    nomfichier=nom_fichier = nomfichier_freq[:-9]+"_decode.txt"
+    with open(nomfichier , "w") as fichier:
+        # Écrire la fréquence totale dans le fichier
+        for el in res:
+            fichier.write(el)
+    print("décodage du fichier "+nomfichier_freq[:-9]+ " terminé.")
 
 
 if __name__ =="__main__":
+    
+    liste_fichiers_a_encoder=["fichiers_tests_encodage/textesimple.txt","fichiers_tests_encodage/extraitalice.txt","fichiers_tests_encodage/alice.txt"]
+    
     #compression et affichage des statistiques des fichiers de données
-    for fichier in liste_fichiers:
+    for fichier in liste_fichiers_a_encoder:
         compression(fichier)
         fichierbinaire=fichier[:-4]+ "_comp.bin"
         taux_compression(fichier,fichierbinaire)
 
-    inverser_compression("fichiers_tests/extraitalice_comp.bin")
+    #ecrire le nom correct des fichiers en rentrant en premier le fichier binaire puis l'alphabet dans une sous-liste 
+    liste_fichiers_a_decoder=[["fichiers_tests_decodage/exemple_comp.bin","fichiers_tests_decodage/exemple_freq.txt"],["fichiers_tests_encodage/textesimple_comp.bin","fichiers_tests_encodage/textesimple_freq.txt"]]
+    for fichier in liste_fichiers_a_decoder:
+        decompression(fichier[0],fichier[1])
+    
+    
+  

@@ -1,4 +1,4 @@
-from frequence_caractere import frequence_alphabet
+from frequence_caractere import *
 
 class Node:
     """
@@ -37,7 +37,10 @@ class Node:
     # Méthode d'affichage du nœud
     def __str__(self):
         return f"{self.caractere}:{self.frequence}"
-
+    def is_leaf(self):
+        if self.leftChild is self.rightChild is None:
+            return True
+        return False
 
 class Tree:
     """
@@ -61,7 +64,7 @@ class Tree:
         return self.print_tree(self.root, 0)
 
     # Méthode récursive pour l'affichage de l'arbre 
-    """ def print_tree(self, node, indent, is_right=False):
+    def print_tree(self, node, indent, is_right=False):
          if node is None:
              return ""
          result = ""
@@ -75,7 +78,7 @@ class Tree:
          result += f"__{str(node)}\n"
          if node.getleftChild():
              result += self.print_tree(node.getleftChild(), indent + 4, False)
-         return result"""
+         return result
     
 
         
@@ -93,17 +96,22 @@ def minArbre(liste):
             min_arbre = el
     return min_arbre
 
-def creerArbre(nomfichier):
+def creerArbre(nomfichier,action=None):
     """
     Cette fonction crée un arbre de Huffman à partir d'une liste de fréquences d'un texte.
 
     Returns:
     Tree
     """
+    
     # Obtention des fréquences de chaque caractère dans le texte
-    alphabet = frequence_alphabet(nomfichier)
+    if action=="decodage":
+        alphabet=frequence_alphabet_decodage(nomfichier)
+       
+    else:
+        alphabet = frequence_alphabet_encodage(nomfichier)
+        
     liste_arbres = []
-
     # Création d'un arbre pour chaque caractère
     for el in alphabet[0].keys():
         noeud = Node(el, alphabet[0][el])
@@ -116,13 +124,12 @@ def creerArbre(nomfichier):
         liste_arbres.remove(t1)
         t2 = minArbre(liste_arbres)
         liste_arbres.remove(t2)
-
+    
         # Création d'un nouveau nœud interne avec les arbres t1 et t2 comme enfants
         noeud_t = Node("intermediaire", t1.getroot().getfrequence() + t2.getroot().getfrequence(), t1.getroot(), t2.getroot())
         arbret = Tree(noeud_t)
         liste_arbres.insert(0, arbret)
     
     return liste_arbres[0]
-
 
 

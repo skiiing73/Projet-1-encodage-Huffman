@@ -2,7 +2,7 @@ from collections import OrderedDict
 
 from more_itertools import strip
 
-def frequence_alphabet(nom_fichier):
+def frequence_alphabet_encodage(nom_fichier):
     """ 
     Le but de cette fonction est de determiner l'alphabet et la frequence d'appartion des caractères d'un fichier texte
 
@@ -38,11 +38,43 @@ def frequence_alphabet(nom_fichier):
     # Trier le dictionnaire par clé puis par valeur
     alphabet = OrderedDict(sorted(alphabet.items(), key=lambda t: t[0]))
     alphabet = OrderedDict(sorted(alphabet.items(), key=lambda t: t[1]))
-    
+   
     return alphabet,nb_caracteres
     
 
+def frequence_alphabet_decodage(nom_fichier):
+    """ 
+    Le but de cette fonction est de convertir ls donnees d'un fichier contenant l'alphabet et la frequence d'un caractere
+    en un dictionnaire  
 
+    Args:
+    - nom_fichier (str): Le nom du fichier à partir duquel les fréquences de l'alphabet sont extraites.
+    """
+    # Ouvrir le fichier en mode lecture ('r' signifie lecture)
+    with open(nom_fichier, 'r') as file:
+        # Lire chaque ligne du fichier dans une liste
+        lignes = file.readlines()
+        
+        i = 1
+        alphabet = {}  # Dictionnaire pour stocker les caractères et leur fréquence
+        
+        # Parcourir chaque ligne du fichier
+        while i < len(lignes):
+            lignes_en_cours = lignes[i]
+            if lignes_en_cours[0]=="\n":
+                alphabet.update({f"\n": int(lignes[i+1][1:])})
+                i+=1
+            else:
+                alphabet.update({f"{lignes_en_cours[0]}": int(lignes_en_cours[2:])})
+            
+            i += 1  # Passer à la ligne suivante
+        
+     # Trier le dictionnaire par clé puis par valeur
+    alphabet = OrderedDict(sorted(alphabet.items(), key=lambda t: t[0]))
+    alphabet = OrderedDict(sorted(alphabet.items(), key=lambda t: t[1]))
+      
+    return alphabet,3
+    
 def creation_fichier_frequence(nom_fichier):
     """
     Cette fonction crée un fichier texte avec l'alphabet et les fréquences de chaque caractère.
@@ -52,7 +84,7 @@ def creation_fichier_frequence(nom_fichier):
     """
     
     # Appeler la fonction frequence_alphabet pour obtenir les fréquences de chaque caractère
-    alphabet = frequence_alphabet(nom_fichier)
+    alphabet = frequence_alphabet_encodage(nom_fichier)
     
     # Supprimer l'extension du fichier pour obtenir le nouveau nom de fichier
     nom_fichier = nom_fichier[:-4]
@@ -64,7 +96,6 @@ def creation_fichier_frequence(nom_fichier):
         # Écrire les fréquences de chaque caractère dans le fichier
         for caractere, frequence in alphabet[0].items():
             fichier.write(f"{caractere} {frequence}\n")
-
 
 
 
