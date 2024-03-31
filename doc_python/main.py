@@ -4,7 +4,6 @@ from encodage_fichier import *
 from decodage_fichier import *
 from bitarray import bitarray
 import os
-import sys
 
 def compression(nomfichier):
     """
