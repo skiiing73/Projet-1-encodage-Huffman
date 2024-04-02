@@ -31,7 +31,7 @@ def decodage_fichier(nomfichier,huffmantree):
     if len(chaines_encodee) < 1000:
         # Si le fichier est assez petit, on utilise le parcours de l'arbre pour chaque caractere
         def rec_decodage_fichier(node, chaines_encodees, res, huffmantree):
-            if chaines_encodees == "":
+            if chaines_encodees == "" or len(res)==huffmantree.getroot().getfrequence():
                 return res
             elif node.getleftChild() is None and node.getrightChild() is None:
                 # Si le nœud est une feuille, ajoute le caractère au résultat
