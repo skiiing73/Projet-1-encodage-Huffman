@@ -55,7 +55,7 @@ def decodage_fichier(nomfichier,huffmantree):
         res_tempo = ""#liste temporaire permettant de stocker la valeur d'encodage du caractere jusqu'a ce qu'il soit décoder
         for i in range(len(chaines_encodee)):
             res_tempo += chaines_encodee[i]
-            if res_tempo in dict_encode.values():
+            if res_tempo in dict_encode.values() and len(res)!=huffmantree.getroot().getfrequence():
                 # Si la séquence encodée correspond à une valeur dans le dictionnaire, ajoute la clé au résultat
                 for key, value in dict_encode.items():
                     if value == res_tempo:

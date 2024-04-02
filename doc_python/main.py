@@ -80,7 +80,7 @@ if __name__ =="__main__":
         taux_compression(fichier,fichierbinaire)
 
     #ecrire le nom correct des fichiers en rentrant en premier le fichier binaire puis l'alphabet dans une sous-liste 
-    liste_fichiers_a_decoder=[["fichiers_tests_decodage/exemple_comp.bin","fichiers_tests_decodage/exemple_freq.txt"],["fichiers_tests_encodage/textesimple_comp.bin","fichiers_tests_encodage/textesimple_freq.txt"]]
+    liste_fichiers_a_decoder=[["fichiers_tests_decodage/exemple_comp.bin","fichiers_tests_decodage/exemple_freq.txt"],["fichiers_tests_encodage/alice_comp.bin","fichiers_tests_encodage/alice_freq.txt"]]
     for fichier in liste_fichiers_a_decoder:
         decompression(fichier[0],fichier[1])
     
